@@ -24,7 +24,8 @@ const WidgetMeteo = ({ zipCode, city }) => {
    appliqué conditionnellement après les rendus suivants, si l'une des dépendances change de valeur
   */
   useEffect(() => {
-    axios.get('http://localhost:1234')
+    // URL serveur de dev : http://localhost:1234
+    axios.get( 'https://api.openweathermap.org/data/2.5/weather?q=63000,fr&APPID=23cf53063f855a630a4874ab51a4859b&units=metric')
       .then((response) => {
         // console.log(response);
 
