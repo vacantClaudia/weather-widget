@@ -35,6 +35,20 @@ const WidgetMeteo = ({ zipCode, city }) => {
   */
   const [ temperature, setTemperature ] = useState('-');
 
+  // variable d'environnement : variable qui change de valeur en fonction
+  // de l'environnement dans lequel on est (dev ou prod)
+  // console.log('environnement: ', process.env.NODE_ENV);
+
+  // objectif : on a une API différente en dev et en prod, on voudrait que
+  // quand on est en mode dev (yarn start) ce soit l'API de dev qui soit
+  // utilisée, et quand on est en mode production (yarn build et déployé)
+  // ce soit l'API de production, ET on voudrait que ce soit automatique
+  
+  // variables d'environnement avec create-react-app :
+  // https://create-react-app.dev/docs/adding-custom-environment-variables/
+
+  console.log('API_URL', process.env.REACT_APP_API_URL);
+
   /*
   deuxième argument de useEffect :
    - si pas indiqué => après chaque rendu du composant
@@ -43,8 +57,17 @@ const WidgetMeteo = ({ zipCode, city }) => {
    appliqué conditionnellement après les rendus suivants, si l'une des dépendances change de valeur
   */
   useEffect(() => {
-    // URL serveur de dev : http://localhost:1234
-    axios.get( 'https://api.openweathermap.org/data/2.5/weather?q=63000,fr&APPID=23cf53063f855a630a4874ab51a4859b&units=metric')
+    let url;
+    // si on est en mode dev on utilise l'URL de l'API de dev
+    if (process.env.NODE_ENV === 'development') {
+      url = process.env.REACT_APP_API_URL;
+    } else {
+      /* si on est en mode production, construction avec URL de l'API de 
+      production */
+      url = `${process.env.REACT_APP_API_URL}?q=${zipCode},fr&APPID=${process.env.REACT_APP_API_KEY}&units=metric`;
+    }
+      
+    axios.get(url)
       .then((response) => {
         // console.log(response);
 
