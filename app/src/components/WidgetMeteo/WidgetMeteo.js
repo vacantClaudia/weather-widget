@@ -2,6 +2,25 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+/*
+Surge : outil pour déployer un projet front en static
+https://surge.sh/
+- il faut avoir un build de production ('yarn build')
+- il faut avoir installé surge en global sur la machine ('npm install --global surge')
+=> accessible depuis n'importe quel projet
+- pour déployer un projet : 'surge nom-du-dossier' avec le dossier qu'on veut 
+dépler (par exemple dist ou build), appuyer sur Entrée quand il propose
+un nom de domaine
+- la première fois qu'on lance la commande 'surge' sur la machine il faut
+indiquer des identifiants pour créer un compte
+- il est possible qu'il y ait une erreur si le nom de domaine est déjà pris
+"Aborted - you do not have permission to publish to untidy-disgust.surge.sh"
+=> dans ce cas, relancer la commande jusqu'à ce que ça marche
+
+Pour lister nos projets : `surge list`
+Pour dépublier un projet : `surge teardown nom-de-domaine`
+*/
+
 import './widgetMeteo.scss';
 
 const WidgetMeteo = ({ zipCode, city }) => {
