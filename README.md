@@ -42,3 +42,10 @@ Surge propose une solution gratuite pour héberger du contenu statique (HTML/CSS
 ---
 
 _Quand t'auras fini de jouer pourquoi pas recommencer ? Tiens cadeau https://github.com/public-apis/public-apis_
+
+
+Utilisation du serveur local :
+`node api.js` (en étant dans le dossier racine du projet : Spe-React-E20-.....)
+
+Utilisation du front en local
+`yarn start` en étant dans le dossier "app"
